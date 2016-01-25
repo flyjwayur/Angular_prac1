@@ -1,0 +1,16 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+input {
+    margin: 0.5em;
+}
+
+.row > div {
+    line-height: 40px;
+}
+
+.row > div > input {
+    height: 26px;
+    line-height: 24px;
+}

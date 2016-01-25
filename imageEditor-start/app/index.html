@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Image Editor</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+
+<body ng-app="imageEditorApp">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="container" ng-controller="MainCtrl">
+        <!-- Add your site or application content here -->
+        <div class="row">
+            <div class="col-xs-12">
+                <input type="file" onchange="angular.element(this).scope().setImageFile(this)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="myCanvas" style="width: 100%;">
+                    <!-- Insert fallback content here -->
+                </canvas>
+            </div>
+            <div class="col-xs-6">
+                <h3>Brightness / Contrast</h3>
+                <div class="row">
+                    <div class="col-xs-3">
+                        Brighness&nbsp;-/+
+                    </div>
+                    <div class="col-xs-8">
+                        <input type="range" step="1" min="-255" max="255" ng-model="brightness" ng-change="applyFilters()">
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="text" size="4" ng-model="brightness" ng-change="applyFilters()">
+                    </div>
+                </div>
+
+                <div class="row" ng-hide="autocontrast">
+                    <div class="col-xs-3">
+                        Contrast&nbsp;-/+
+                    </div>
+                    <div class="col-xs-8">
+                        <input type="range" step="0.1" min="0.1" max="10" ng-model="contrast" ng-change="applyFilters()">
+                    </div>
+                    <div class="col-xs-1" ng-hide="autocontrast">
+                        <input type="text" size="4" ng-model="contrast" ng-change="applyFilters()">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        Autocontrast on/off
+                    </div>
+                    <div class="col-xs-8">
+                        <input type="checkbox" ng-model="autocontrast" ng-change="applyFilters()">
+                    </div>
+                </div>
+
+                <h3>Color filter <span ng-attr-style= "background-color: rgb({{color.red}},{{color.green}},{{color.blue}}); border: 1px solid #333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h3>
+
+                <div class="row">
+                    <div class="col-xs-1">
+                        R
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="range" min="0" max="255" ng-model="color.red">
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="text" size="4" ng-model="color.red">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-1">
+                        G
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="range" step="1" min="0" max="255" ng-model="color.green">
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="text" size="4" ng-model="color.green">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-1">
+                        B
+                    </div>
+                    <div class="col-xs-10">
+                        <input type="range" step="1" min="0" max="255" ng-model="color.blue">
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="text" size="4" ng-model="color.blue">
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-2">
+                        Strength
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="range" step="1" min="1" max="100" ng-model="strength" ng-change="applyFilters()">
+                    </div>
+                    <div class="col-xs-1">
+                        <input type="text" size="4" ng-model="strength" ng-change="applyFilters()">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        Vignette on/off
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="checkbox" ng-model="vignette" ng-change="applyFilters()">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <a class="btn btn-default" ng-href="{{url}}" download="edited" ng-click="saveImage()">Save image</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <!-- endbuild -->
+</body>
+
+</html>
